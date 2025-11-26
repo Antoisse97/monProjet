@@ -2,7 +2,7 @@
 /**
  * Décrivez votre classe main ici.
  *
- * @author (votre nom)
+ * @author (antoisse)
  * @version (un numéro de version ou une date)
  */
 public class main
