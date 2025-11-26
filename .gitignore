@@ -1,0 +1,16 @@
+# --- Java Classique ---
+*.class
+*.jar
+bin/
+build/
+target/
+
+# --- Spécifique BlueJ (Trrès important) ---
+*.ctxt
+backup/
+# On garde package.bluej car c'est le fichier projet,
+# mais on ignore les fichiers temporaires contextuels.
+
+# --- Système ---
+.DS_Store
+Thumbs.db
