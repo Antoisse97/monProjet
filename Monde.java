@@ -2,7 +2,7 @@
 /**
  * Décrivez votre classe Monde ici.
  *
- * @author (votre nom)
+ * @author (caleb)
  * @version (un numéro de version ou une date)
  */
 public class Monde
