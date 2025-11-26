@@ -1,19 +1,19 @@
 
 /**
- * Décrivez votre classe main ici.
+ * Décrivez votre classe Piece ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class main
+public class Piece
 {
     // variables d'instance - remplacez l'exemple qui suit par le vôtre
     private int x;
 
     /**
-     * Constructeur d'objets de classe main
+     * Constructeur d'objets de classe Piece
      */
-    public main()
+    public Piece()
     {
         // initialisation des variables d'instance
         x = 0;
@@ -28,6 +28,6 @@ public class main
     public int sampleMethod(int y)
     {
         // Insérez votre code ici
-        return x + y; 
+        return x + y;
     }
 }
