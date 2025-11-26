@@ -1,19 +1,19 @@
 
 /**
- * Décrivez votre classe Ploooo ici.
+ * Décrivez votre classe Souvenir ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Ploooo
+public class Souvenir
 {
     // variables d'instance - remplacez l'exemple qui suit par le vôtre
     private int x;
 
     /**
-     * Constructeur d'objets de classe Ploooo
+     * Constructeur d'objets de classe Souvenir
      */
-    public Ploooo()
+    public Souvenir()
     {
         // initialisation des variables d'instance
         x = 0;
