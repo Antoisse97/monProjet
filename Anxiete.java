@@ -1,19 +1,19 @@
 
 /**
- * Décrivez votre classe RobotEmotion ici.
+ * Décrivez votre classe Anxiete ici.
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class RobotEmotion
+public class Anxiete
 {
     // variables d'instance - remplacez l'exemple qui suit par le vôtre
     private int x;
 
     /**
-     * Constructeur d'objets de classe RobotEmotion
+     * Constructeur d'objets de classe Anxiete
      */
-    public RobotEmotion()
+    public Anxiete()
     {
         // initialisation des variables d'instance
         x = 0;
