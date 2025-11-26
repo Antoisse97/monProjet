@@ -2,8 +2,8 @@
 /**
  * Décrivez votre classe Piece ici.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author Sofia Kadiri
+ * @version 1.0
  */
 public class Piece
 {
