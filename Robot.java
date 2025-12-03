@@ -14,6 +14,7 @@ public class Robot {
     private int y; // Ma position colonne
     private Emotion emotionCourante; // L'émotion qui me contrôle en ce moment
     private ArrayList<Emotion> emotionsDebloquees; // Mon sac à dos d'émotions
+    private int pointsDeVie;
 
     // Mon constructeur : c'est ici que je nais
     public Robot(String nom, int xDepart, int yDepart) {
@@ -22,6 +23,7 @@ public class Robot {
         this.y = yDepart;
         this.emotionsDebloquees = new ArrayList<Emotion>();
         this.emotionCourante = null; // Au début, je n'ai pas d'émotion active
+        this.pointsDeVie = 100;
     }
 
     // La méthode principale : je demande à mon émotion de me faire bouger
@@ -89,6 +91,22 @@ public class Robot {
             }
         } else {
             System.out.println("Il n'y a pas d'énigme ici.");
+        }
+    }
+    public void combattre(Monstre m) {
+        System.out.println("--- COMBAT CONTRE " + m.getNom() + " ---");
+        
+        int maForce = 1; 
+        if (emotionCourante != null) {
+            maForce = 3 + emotionCourante.getBonusVitesse();
+        }
+
+        if (maForce >= m.getForce()) {
+            System.out.println("Victoire ! Vous avez écrasé le monstre !");
+        } else {
+            System.out.println("Aïe ! Le monstre est trop fort !");
+            this.pointsDeVie = this.pointsDeVie - m.getForce();
+            System.out.println("Il vous reste " + pointsDeVie + " PV.");
         }
     }
 }

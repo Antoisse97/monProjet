@@ -57,13 +57,29 @@ public class Emotion {
                 return; // On sort
         }
 
-        // --- VERIFICATION IMPORTANTE ---
-        // On demande au Monde si la case est libre (pas de mur, pas hors limite)
+        // --- VÉRIFICATION ET DÉPLACEMENT ---
         if (monde.verifierDeplacement(nouveauX, nouveauY)) {
+            // 1. On bouge le robot
             robot.setPosition(nouveauX, nouveauY);
-            System.out.println("-> Déplacement réussi vers [" + nouveauX + ", " + nouveauY + "]");
+            System.out.println("-> Déplacement vers [" + nouveauX + ", " + nouveauY + "]");
+
+            // 2. On regarde ce qu'il y a dans la pièce (NOUVEAU)
+            Piece pieceActuelle = monde.getPiece(nouveauX, nouveauY);
+
+            // Y a-t-il un monstre ?
+            if (pieceActuelle.aUnMonstre()) {
+                System.out.println("ATTENTION ! Un monstre surgit !");
+                // Le robot se bat automatiquement
+                robot.combattre(pieceActuelle.getMonstre());
+            }
+            
+            // Y a-t-il une énigme ? (Optionnel : on peut l'annoncer)
+            if (pieceActuelle.aUneEnigme()) {
+                System.out.println("Tiens ? Une énigme flotte dans l'air... (Utilisez 'tenterReponse')");
+            }
+
         } else {
-            System.out.println("-> BOUM ! Mur ou sortie de carte, le robot reste sur place.");
+            System.out.println("-> BOUM ! Mur ou sortie de carte.");
         }
     }
     
