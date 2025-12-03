@@ -5,29 +5,15 @@
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Monstre
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
+public class Monstre {
+    private String nom;
+    private int force; 
 
-    /**
-     * Constructeur d'objets de classe Monstre
-     */
-    public Monstre()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+    public Monstre(String nom, int force) {
+        this.nom = nom;
+        this.force = force;
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
-    }
+    public String getNom() { return nom; }
+    public int getForce() { return force; }
 }

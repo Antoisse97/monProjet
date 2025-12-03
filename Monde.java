@@ -82,4 +82,25 @@ public class Monde {
         }
         return null;
     }
+    
+    // Il faut bien le mot PUBLIC devant pour le voir dans BlueJ
+    public void afficher(Robot robot) {
+        for (int y = 0; y < tailleY; y++) {
+            for (int x = 0; x < tailleX; x++) {
+                if (robot.getX() == x && robot.getY() == y) {
+                    System.out.print(" R ");
+                } else if (!grille[x][y].estAccessible()) {
+                    System.out.print("###"); // Mur
+                } else if (grille[x][y].aUnMonstre()) {
+                    System.out.print(" M "); // Monstre (si tu l'as ajouté)
+                } else if (grille[x][y].aUneEnigme()) {
+                    System.out.print(" ? "); // Enigme
+                } else {
+                    System.out.print(" . "); // Vide
+                }
+            }
+            System.out.println();
+        }
+        System.out.println("-------------------------");
+    }
 }
