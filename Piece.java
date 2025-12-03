@@ -5,29 +5,42 @@
  * @author Sofia Kadiri
  * @version 1.0
  */
-public class Piece
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
+public class Piece {
+    // --- 1. DÉCLARATION DES ATTRIBUTS ---
+    // Il faut déclarer ces variables ici pour que "this.nom" existe
+    private String nom;
+    private boolean estUnMur;
+    private Enigme enigme; // L'ajout pour le jeu
 
-    /**
-     * Constructeur d'objets de classe Piece
-     */
-    public Piece()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+    // --- 2. CONSTRUCTEUR ---
+    public Piece(String nom, boolean estUnMur) {
+        this.nom = nom;
+        this.estUnMur = estUnMur;
+        this.enigme = null; // Par défaut, la pièce est vide d'énigme
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
+    // --- 3. MÉTHODES ---
+
+    // Est-ce qu'on peut marcher ici ?
+    public boolean estAccessible() {
+        return !this.estUnMur; 
+    }
+
+    // Gestion des énigmes
+    public void setEnigme(Enigme e) {
+        this.enigme = e;
+    }
+
+    public boolean aUneEnigme() {
+        return this.enigme != null;
+    }
+
+    public Enigme getEnigme() {
+        return this.enigme;
+    }
+
+    // Accesseur simple
+    public String getNom() {
+        return this.nom;
     }
 }

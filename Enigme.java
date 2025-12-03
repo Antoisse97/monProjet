@@ -5,29 +5,22 @@
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class Enigme
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
+public class Enigme {
+    private String question;
+    private String reponseAttendue;
+    private Emotion emotionRecompense; // L'émotion qu'on gagne
 
-    /**
-     * Constructeur d'objets de classe Enigme
-     */
-    public Enigme()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+    public Enigme(String question, String reponseAttendue, Emotion emotionRecompense) {
+        this.question = question;
+        this.reponseAttendue = reponseAttendue;
+        this.emotionRecompense = emotionRecompense;
     }
 
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
+    // Vérifie si la réponse du joueur est bonne (ignorer majuscules/minuscules)
+    public boolean verifierReponse(String proposition) {
+        return this.reponseAttendue.equalsIgnoreCase(proposition);
     }
+
+    public String getQuestion() { return question; }
+    public Emotion getRecompense() { return emotionRecompense; }
 }
