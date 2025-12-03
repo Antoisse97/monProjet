@@ -22,16 +22,16 @@ public class Emotion {
     }
 
     // Cette méthode gère TOUS les cas ici (pas de classes filles)
-    public void seDeplacer(Robot robot, Monde monde) {
+ public void seDeplacer(Robot robot, Monde monde) {
         int xActuel = robot.getX();
         int yActuel = robot.getY();
         int nouveauX = xActuel;
         int nouveauY = yActuel;
 
+        // --- 1. CHOIX DE LA DIRECTION ---
         switch (this.nom) {
             case "Joie":
-                // Joie : Déplacement aléatoire d'une case (diagonale possible)
-                // On tire un nombre entre -1 et 1 pour X et Y
+                // Mouvement aléatoire
                 int dx = hasard.nextInt(3) - 1; 
                 int dy = hasard.nextInt(3) - 1;
                 nouveauX = xActuel + dx;
@@ -40,22 +40,52 @@ public class Emotion {
                 break;
 
             case "Colère":
-                // Colère : Fonce tout droit (par exemple vers la droite X+2)
-                // Pour l'instant on fixe la direction vers la droite pour faire simple
+                // Fonce vers la droite (+2)
                 nouveauX = xActuel + this.bonusVitesse;
                 System.out.println("Colère charge vers l'avant !");
                 break;
 
             case "Tristesse":
-                // Tristesse : Bouge de 1 case vers le bas (Y+1) lentement
+                // Descend doucement (+1 en Y)
                 nouveauY = yActuel + 1;
                 System.out.println("Tristesse descend doucement...");
                 break;
-                
-             default:
+
+            default:
                 System.out.println("Pas de mouvement défini.");
-                return; // On sort
+                return; 
+        } // <--- IMPORTANT : Le switch se ferme ICI !
+
+        // --- 2. VÉRIFICATION ET ACTION (À l'extérieur du switch) ---
+        
+        // On demande au Monde si le passage est libre
+        if (monde.verifierDeplacement(nouveauX, nouveauY)) {
+            
+            // A. On bouge le robot
+            robot.setPosition(nouveauX, nouveauY);
+            System.out.println("-> Déplacement réussi vers [" + nouveauX + ", " + nouveauY + "]");
+
+            // B. On regarde ce qu'il y a dans la pièce (Monstre / Enigme)
+            Piece pieceActuelle = monde.getPiece(nouveauX, nouveauY);
+
+            // --- GESTION MONSTRE ---
+            if (pieceActuelle.aUnMonstre()) {
+                System.out.println("⚠️ ATTENTION ! Un monstre surgit !");
+                robot.combattre(pieceActuelle.getMonstre());
+            }
+            
+            // --- GESTION ENIGME ---
+            if (pieceActuelle.aUneEnigme()) {
+                System.out.println("❓ Tiens ? Une énigme !");
+                System.out.println("QUESTION : " + pieceActuelle.getEnigme().getQuestion());
+                System.out.println("(Utilise 'tenterReponse' pour gagner l'émotion)");
+            }
+
+        } else {
+            // Si verifierDeplacement renvoie faux (Mur ou Hors limite)
+            System.out.println("-> Le robot reste sur place.");
         }
+    
 
         // --- VÉRIFICATION ET DÉPLACEMENT ---
         if (monde.verifierDeplacement(nouveauX, nouveauY)) {

@@ -66,13 +66,23 @@ public class Monde {
     }
 
     // La méthode CRUCIALE : Le robot demandera "Est-ce que je peux aller là ?"
-    public boolean verifierDeplacement(int x, int y) {
-        // 1. Je vérifie qu'on ne sort pas du tableau (sinon bug !)
+   public boolean verifierDeplacement(int x, int y) {
+        // 1. D'abord, on vérifie qu'on ne sort pas du cadre (sinon erreur Java)
         if (x < 0 || x >= tailleX || y < 0 || y >= tailleY) {
-            return false; // Hors limites
+            System.out.println("⛔ HORS LIMITE : Tu essaies de sortir du cerveau !");
+            return false;
         }
-        // 2. Je regarde si la case est un mur
-        return grille[x][y].estAccessible();
+
+        // 2. Ensuite, on récupère la pièce visée
+        Piece pieceVisee = grille[x][y];
+
+        // 3. On demande à la pièce si on peut entrer
+        if (pieceVisee.estAccessible()) {
+            return true; // C'est bon, le passage est libre
+        } else {
+            System.out.println("⛔ MUR : Boing ! Tu te cognes contre un mur en [" + x + "," + y + "]");
+            return false; // Interdit d'entrer
+        }
     }
     
     // Pour récupérer le nom de la pièce où se trouve le robot
