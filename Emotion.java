@@ -73,9 +73,15 @@ public class Emotion {
                 robot.combattre(pieceActuelle.getMonstre());
             }
             
-            // Y a-t-il une énigme ? (Optionnel : on peut l'annoncer)
+            // Y a-t-il une énigme ?
             if (pieceActuelle.aUneEnigme()) {
-                System.out.println("Tiens ? Une énigme flotte dans l'air... (Utilisez 'tenterReponse')");
+                System.out.println("❓ Tiens ? Une énigme flotte dans l'air...");
+                
+                // On récupère l'énigme pour lire la question
+                Enigme e = pieceActuelle.getEnigme();
+                System.out.println("QUESTION : " + e.getQuestion()); // <-- C'est ça qui manquait !
+                
+                System.out.println("(Faites un clic-droit 'tenterReponse' sur le robot pour répondre)");
             }
 
         } else {
