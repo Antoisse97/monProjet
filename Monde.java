@@ -11,10 +11,12 @@ public class Monde {
     private Piece[][] grille;
     private int tailleX = 10; // Largeur arbitraire (à ajuster selon ton dessin)
     private int tailleY = 10; // Hauteur arbitraire
+    private Canvas ecran;
 
     public Monde() {
         this.grille = new Piece[tailleX][tailleY];
         this.initialiserCarte();
+        this.ecran = new Canvas(tailleX, tailleY);
     }
 
     // C'est ici que je construis ton labyrinthe
@@ -95,22 +97,11 @@ public class Monde {
     
     // Il faut bien le mot PUBLIC devant pour le voir dans BlueJ
     public void afficher(Robot robot) {
-        for (int y = 0; y < tailleY; y++) {
-            for (int x = 0; x < tailleX; x++) {
-                if (robot.getX() == x && robot.getY() == y) {
-                    System.out.print(" R ");
-                } else if (!grille[x][y].estAccessible()) {
-                    System.out.print("###"); // Mur
-                } else if (grille[x][y].aUnMonstre()) {
-                    System.out.print(" M "); // Monstre (si tu l'as ajouté)
-                } else if (grille[x][y].aUneEnigme()) {
-                    System.out.print(" ? "); // Enigme
-                } else {
-                    System.out.print(" . "); // Vide
-                }
-            }
-            System.out.println();
+        // Version graphique
+        if (this.ecran != null) {
+            this.ecran.dessinerMonde(this, robot);
         }
-        System.out.println("-------------------------");
+        // Petit message console pour confirmer que ça marche
+        System.out.println("--- Carte mise à jour graphiquement ---");
     }
 }
