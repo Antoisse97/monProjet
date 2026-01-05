@@ -1,33 +1,25 @@
-
-/**
- * Décrivez votre classe Souvenir ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
-public class Souvenir
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
-
-    /**
-     * Constructeur d'objets de classe Souvenir
-     */
-    public Souvenir()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+public class Souvenir {
+    private String description;
+    private String cle; // Clé unique pour identifier le souvenir
+    
+    public Souvenir(String description, String cle) {
+        this.description = description;
+        this.cle = cle;
     }
-
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
+    
+    public void afficher() {
+        System.out.println("╔════════════════════════════════════╗");
+        System.out.println("║         SOUVENIR                    ║");
+        System.out.println("╠════════════════════════════════════╣");
+        System.out.println("║ " + description);
+        System.out.println("╚════════════════════════════════════╝");
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+    
+    public String getCle() {
+        return cle;
     }
 }

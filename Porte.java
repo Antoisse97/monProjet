@@ -1,33 +1,53 @@
-
-/**
- * Décrivez votre classe Porte ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
-public class Porte
-{
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
-
-    /**
-     * Constructeur d'objets de classe Porte
-     */
-    public Porte()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+public class Porte {
+    private Piece destination;
+    private Amelioration effet;
+    private int requeteEmotions; // Nombre d'émotions requises pour ouvrir
+    
+    public Porte(Piece destination) {
+        this.destination = destination;
+        this.effet = null;
+        this.requeteEmotions = 0;
     }
-
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
+    
+    public Porte(Piece destination, Amelioration effet, int requeteEmotions) {
+        this.destination = destination;
+        this.effet = effet;
+        this.requeteEmotions = requeteEmotions;
+    }
+    
+    public void ouvrir(Robot robot) {
+        if (robot.getEmotionsDebloquees().size() >= requeteEmotions) {
+            System.out.println("La porte s'ouvre vers " + destination.getNom());
+            
+            if (effet != null) {
+                effet.appliquer(robot);
+            }
+        } else {
+            System.out.println("Il faut " + requeteEmotions + " émotions pour ouvrir cette porte.");
+        }
+    }
+    
+    public Piece getDestination() {
+        return destination;
+    }
+    
+    public void setDestination(Piece destination) {
+        this.destination = destination;
+    }
+    
+    public Amelioration getEffet() {
+        return effet;
+    }
+    
+    public void setEffet(Amelioration effet) {
+        this.effet = effet;
+    }
+    
+    public int getRequeteEmotions() {
+        return requeteEmotions;
+    }
+    
+    public void setRequeteEmotions(int requeteEmotions) {
+        this.requeteEmotions = requeteEmotions;
     }
 }
