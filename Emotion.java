@@ -1,6 +1,6 @@
 
 /**
- * Décrivez votre classe Emotion ici.
+ * Classe Emotion - Gère les différents comportements de déplacement
  *
  * @author (votre nom)
  * @version (un numéro de version ou une date)
@@ -14,50 +14,72 @@ public class Emotion {
     private int bonusVitesse;
     private Random hasard; // Utile pour la Joie
 
-    public Emotion(String nom, String couleur, int bonusVitesse) {
-        this.nom = nom;
-        this.couleur = couleur;
-        this.bonusVitesse = bonusVitesse;
-        this.hasard = new Random();
-    }
-
+ public Emotion(String nom, String couleur, int bonusVitesse) {
+    this.nom = nom;
+    this.couleur = couleur;
+    this.bonusVitesse = bonusVitesse;
+    this.hasard = new Random();
+ }
+    
+ /**
+  * Méthode principale de déplacement selon l'émotion
+  * Gère tous les types d'émotions sans duplication
+  */
     // Cette méthode gère TOUS les cas ici (pas de classes filles)
  public void seDeplacer(Robot robot, Monde monde) {
-        int xActuel = robot.getX();
-        int yActuel = robot.getY();
-        int nouveauX = xActuel;
-        int nouveauY = yActuel;
+    int xActuel = robot.getX();
+    int yActuel = robot.getY();
+    int nouveauX = xActuel;
+    int nouveauY = yActuel;
 
-        // --- 1. CHOIX DE LA DIRECTION ---
-        switch (this.nom) {
-            case "Joie":
-                // Mouvement aléatoire
-                int dx = hasard.nextInt(3) - 1; 
-                int dy = hasard.nextInt(3) - 1;
-                nouveauX = xActuel + dx;
-                nouveauY = yActuel + dy;
-                System.out.println("Joie essaie de sauter partout !");
+    // --- 1. CHOIX DE LA DIRECTION SELON L'EMOTION---
+    switch (this.nom) {
+        case "Joie":
+            // Mouvement aléatoire
+            int dx = hasard.nextInt(3) - 1; 
+            int dy = hasard.nextInt(3) - 1;
+            nouveauX = xActuel + dx;
+            nouveauY = yActuel + dy;
+            System.out.println("Joie essaie de sauter partout !");
+            break;
+
+        case "Colère":
+            // Fonce vers la droite (+2)
+            nouveauX = xActuel + this.bonusVitesse;
+            System.out.println("Colère charge vers l'avant !");
+            break;
+
+        case "Tristesse":
+            // Descend doucement (+1 en Y)
+            nouveauY = yActuel + 1;
+            System.out.println("Tristesse descend doucement...");
+            break;
+        
+        case "Dégoût":
+            // Se déplace en évitant certaines directions (exemple: évite de descendre)
+                nouveauX = xActuel + 1; // Préfère aller à droite
+                System.out.println("Dégoût se détourne avec prudence...");
                 break;
 
-            case "Colère":
-                // Fonce vers la droite (+2)
-                nouveauX = xActuel + this.bonusVitesse;
-                System.out.println("Colère charge vers l'avant !");
+            case "Nostalgie":
+                // Cherche les souvenirs (pour l'instant, va vers le haut-droite)
+                nouveauX = xActuel + 1;
+                nouveauY = yActuel - 1;
+                System.out.println("Nostalgie cherche des souvenirs...");
                 break;
 
-            case "Tristesse":
-                // Descend doucement (+1 en Y)
-                nouveauY = yActuel + 1;
-                System.out.println("Tristesse descend doucement...");
-                break;
+            case "Anxiété":
+                // Contrôlée par le joueur - ne bouge pas automatiquement
+                System.out.println("Anxiété attend vos ordres (utilisez deplacerManuellement)");
+                return; // Sort de la méthode sans bouger
 
-            default:
-                System.out.println("Pas de mouvement défini.");
-                return; 
+        default:
+            System.out.println("Pas de mouvement défini pour " + this.nom);
+            return; 
         } // <--- IMPORTANT : Le switch se ferme ICI !
 
-        // --- 2. VÉRIFICATION ET ACTION (À l'extérieur du switch) ---
         
+        // --- 2. VÉRIFICATION ET ACTION (À l'extérieur du switch) ---
         // On demande au Monde si le passage est libre
         if (monde.verifierDeplacement(nouveauX, nouveauY)) {
             
@@ -87,36 +109,36 @@ public class Emotion {
         }
     
 
-        // --- VÉRIFICATION ET DÉPLACEMENT ---
-        if (monde.verifierDeplacement(nouveauX, nouveauY)) {
-            // 1. On bouge le robot
-            robot.setPosition(nouveauX, nouveauY);
-            System.out.println("-> Déplacement vers [" + nouveauX + ", " + nouveauY + "]");
+        // // --- VÉRIFICATION ET DÉPLACEMENT ---
+        // if (monde.verifierDeplacement(nouveauX, nouveauY)) {
+            // // 1. On bouge le robot
+            // robot.setPosition(nouveauX, nouveauY);
+            // System.out.println("-> Déplacement vers [" + nouveauX + ", " + nouveauY + "]");
 
-            // 2. On regarde ce qu'il y a dans la pièce (NOUVEAU)
-            Piece pieceActuelle = monde.getPiece(nouveauX, nouveauY);
+            // // 2. On regarde ce qu'il y a dans la pièce (NOUVEAU)
+            // Piece pieceActuelle = monde.getPiece(nouveauX, nouveauY);
 
-            // Y a-t-il un monstre ?
-            if (pieceActuelle.aUnMonstre()) {
-                System.out.println("ATTENTION ! Un monstre surgit !");
-                // Le robot se bat automatiquement
-                robot.combattre(pieceActuelle.getMonstre());
-            }
+            // // Y a-t-il un monstre ?
+            // if (pieceActuelle.aUnMonstre()) {
+                // System.out.println("ATTENTION ! Un monstre surgit !");
+                // // Le robot se bat automatiquement
+                // robot.combattre(pieceActuelle.getMonstre());
+            // }
             
-            // Y a-t-il une énigme ?
-            if (pieceActuelle.aUneEnigme()) {
-                System.out.println("❓ Tiens ? Une énigme flotte dans l'air...");
+            // // Y a-t-il une énigme ?
+            // if (pieceActuelle.aUneEnigme()) {
+                // System.out.println("❓ Tiens ? Une énigme flotte dans l'air...");
                 
-                // On récupère l'énigme pour lire la question
-                Enigme e = pieceActuelle.getEnigme();
-                System.out.println("QUESTION : " + e.getQuestion()); // <-- C'est ça qui manquait !
+                // // On récupère l'énigme pour lire la question
+                // Enigme e = pieceActuelle.getEnigme();
+                // System.out.println("QUESTION : " + e.getQuestion()); // <-- C'est ça qui manquait !
                 
-                System.out.println("(Faites un clic-droit 'tenterReponse' sur le robot pour répondre)");
-            }
+                // System.out.println("(Faites un clic-droit 'tenterReponse' sur le robot pour répondre)");
+            // }
 
-        } else {
-            System.out.println("-> BOUM ! Mur ou sortie de carte.");
-        }
+        // } else {
+            // System.out.println("-> BOUM ! Mur ou sortie de carte.");
+        // }
     }
     
     // Les getters (accesseurs) pour récupérer les infos
