@@ -1,48 +1,33 @@
-public class Amelioration {
-    private AmeliorationType type;
-    private int valeur;
-    private Emotion nouvelleEmotion;
-    
-    public Amelioration(AmeliorationType type, int valeur) {
-        this.type = type;
-        this.valeur = valeur;
-        this.nouvelleEmotion = null;
-    }
-    
-    public Amelioration(Emotion nouvelleEmotion) {
-        this.type = AmeliorationType.NOUVELLE_EMOTION;
-        this.nouvelleEmotion = nouvelleEmotion;
-        this.valeur = 0;
-    }
-    
-    public void appliquer(Robot robot) {
-        switch (type) {
-            case VITESSE:
-                robot.setVitesse(robot.getVitesse() + valeur);
-                System.out.println("Vitesse augmentée de " + valeur);
-                break;
-            case VIE:
-                robot.setVie(robot.getVie() + valeur);
-                System.out.println("Vie augmentée de " + valeur);
-                break;
-            case NOUVELLE_EMOTION:
-                if (nouvelleEmotion != null) {
-                    robot.ajouterEmotion(nouvelleEmotion);
-                    System.out.println("Nouvelle émotion débloquée : " + nouvelleEmotion.getNom());
-                }
-                break;
-        }
-    }
-    
-    public AmeliorationType getType() {
-        return type;
-    }
-    
-    public int getValeur() {
-        return valeur;
-    }
-}
 
-enum AmeliorationType {
-    VITESSE, VIE, NOUVELLE_EMOTION
+/**
+ * Décrivez votre classe Amelioration ici.
+ *
+ * @author (votre nom)
+ * @version (un numéro de version ou une date)
+ */
+public class Amelioration
+{
+    // variables d'instance - remplacez l'exemple qui suit par le vôtre
+    private int x;
+
+    /**
+     * Constructeur d'objets de classe Amelioration
+     */
+    public Amelioration()
+    {
+        // initialisation des variables d'instance
+        x = 0;
+    }
+
+    /**
+     * Un exemple de méthode - remplacez ce commentaire par le vôtre
+     *
+     * @param  y   le paramètre de la méthode
+     * @return     la somme de x et de y
+     */
+    public int sampleMethod(int y)
+    {
+        // Insérez votre code ici
+        return x + y;
+    }
 }
