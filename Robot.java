@@ -34,7 +34,18 @@ public class Robot {
             System.out.println(this.nom + " : Je ne ressens rien, je ne bouge pas.");
         }
     }
-
+    
+    // --- DÉPLACEMENT MANUEL (POUR ANXIÉTÉ) --- 
+    /**
+     * Permet au joueur de contrôler directement le robot
+     * @param direction "haut", "bas", "gauche", "droite"
+     * @param monde Le monde du jeu pour vérifier les collisions
+     */
+    
+    public void deplacerManuellement(String direction, Monde monde) {
+        int nouveauX = this.x; 
+        int nouveauY = this.y;
+    }
     // --- GESTION EMOTIONS ---
     public void changerEmotion(Emotion nouvelleEmotion) {
         this.emotionCourante = nouvelleEmotion;
