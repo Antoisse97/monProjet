@@ -29,7 +29,7 @@ public class Robot {
     public void seDeplacer(Monde monde) {
         if (this.emotionCourante != null) {
             // Je me donne moi-même ("this") à l'émotion pour qu'elle modifie mes x et y
-            this.emotionCourante.seDeplacer(this, monde);
+            this.emotionCourante.seDeplacer(this, monde);//hfhfhj
         } else {
             System.out.println(this.nom + " : Je ne ressens rien, je ne bouge pas.");
         }
